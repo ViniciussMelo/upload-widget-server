@@ -2,7 +2,7 @@ import { schema } from '@/infra/db/schemas'
 import { z } from 'zod'
 
 import { db } from '@/infra/db'
-import { type Either, makeRight } from '@/shared/either'
+import { type Either, makeRight } from '@/infra/shared/either'
 import { asc, count, desc, ilike } from 'drizzle-orm'
 
 const getUploadsInput = z.object({

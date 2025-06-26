@@ -4,8 +4,8 @@ import { z } from 'zod'
 import { InvalidFileFormat } from './errors/invalid-file-format'
 
 import { db } from '@/infra/db'
+import { type Either, makeLeft, makeRight } from '@/infra/shared/either'
 import { uploadFileToStorage } from '@/infra/storage/upload-file-to-storage'
-import { type Either, makeLeft, makeRight } from '@/shared/either'
 
 const uploadImageInput = z.object({
   fileName: z.string(),

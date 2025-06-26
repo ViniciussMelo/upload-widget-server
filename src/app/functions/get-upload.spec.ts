@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import { isRight, unwrapEither } from '@/shared/either'
+import { isRight, unwrapEither } from '@/infra/shared/either'
 import { makeUpload } from '@/test/factories/make-upload'
 import dayjs from 'dayjs'
 import { describe, expect, it } from 'vitest'
