@@ -5,4 +5,8 @@ export default defineConfig({
   clean: true,
   format: 'esm',
   outDir: 'dist',
+  noExternal: ['drizzle-orm'],
+  loader: {
+    '.sql': 'copy',
+  },
 })
