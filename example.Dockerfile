@@ -22,7 +22,7 @@ RUN pnpm run build
 # remove dev dependencies
 RUN npm prune --production
 
-FROM node:20-alpine3.21 as deploy
+FROM gcr.io/distroless/nodejs22-debian12 as deploy
 
 USER 1000
 
@@ -43,4 +43,4 @@ ENV CLOUDFLARE_PUBLIC_URL="http://localhost"
 
 EXPOSE 3333
 
-CMD ["node", "dist/infra/http/server.js"]
+CMD ["dist/infra/http/server.js"]
