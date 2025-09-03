@@ -26,3 +26,22 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Generate tag
+        id: generate_tag
+        # GITHUB_SHA - get commit hash
+        # $GITHUB_SHA | head -c7 - get only the first 7 characters of the commit hash
+        # "sha=$SHA" >> $GITHUB_OUTPUT - store the value of $SHA in the sha variable and put it in the github output
+        run: |
+          SHA=${ECHO $GITHUB_SHA | head -c7}
+          echo "sha=$SHA" >> $GITHUB_OUTPUT
+
+      - name: Build and push image to AWS ECR
+        id: build-push-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ steps.generate_tag.outputs.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
