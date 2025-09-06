@@ -2,7 +2,7 @@ name: widget-server pipe
 
 on: 
   push:
-    braches: 
+    branches: 
       - 'main'
 
 jobs:
